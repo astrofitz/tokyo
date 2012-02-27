@@ -353,8 +353,12 @@ cdef void sgemv6(CBLAS_TRANSPOSE TransA, float alpha, np.ndarray A,
     if A.ndim != 2: raise ValueError("A is not a matrix")
     if x.ndim != 1: raise ValueError("x is not a vector")
     if y.ndim != 1: raise ValueError("y is not a vector")
-    if A.shape[0] != y.shape[0]: raise ValueError("A rows != y rows")
-    if A.shape[1] != x.shape[0]: raise ValueError("A columns != x rows")
+    if TransA == CblasNoTrans:
+        if A.shape[0] != y.shape[0]: raise ValueError("A rows != y rows")
+        if A.shape[1] != x.shape[0]: raise ValueError("A columns != x rows")
+    else:
+        if A.shape[1] != y.shape[0]: raise ValueError("A columns != y rows")
+        if A.shape[0] != x.shape[0]: raise ValueError("A rows != x rows")
     if A.descr.type_num != NPY_FLOAT: raise ValueError("A is not of type float")
     if x.descr.type_num != NPY_FLOAT: raise ValueError("x is not of type float")
     if y.descr.type_num != NPY_FLOAT: raise ValueError("y is not of type float")
@@ -401,8 +405,12 @@ cdef void dgemv6(CBLAS_TRANSPOSE TransA, double alpha, np.ndarray A,
     if A.ndim != 2: raise ValueError("A is not a matrix")
     if x.ndim != 1: raise ValueError("x is not a vector")
     if y.ndim != 1: raise ValueError("y is not a vector")
-    if A.shape[0] != y.shape[0]: raise ValueError("A rows != y rows")
-    if A.shape[1] != x.shape[0]: raise ValueError("A columns != x rows")
+    if TransA == CblasNoTrans:
+        if A.shape[0] != y.shape[0]: raise ValueError("A rows != y rows")
+        if A.shape[1] != x.shape[0]: raise ValueError("A columns != x rows")
+    else:
+        if A.shape[1] != y.shape[0]: raise ValueError("A columns != y rows")
+        if A.shape[0] != x.shape[0]: raise ValueError("A rows != x rows")
     if A.descr.type_num != NPY_DOUBLE: raise ValueError("A is not of type double")
     if x.descr.type_num != NPY_DOUBLE: raise ValueError("x is not of type double")
     if y.descr.type_num != NPY_DOUBLE: raise ValueError("y is not of type double")
