@@ -12,7 +12,7 @@ ext_params['include_dirs'] = [
     '/System/Library/Frameworks/vecLib.framework/Versions/A/Headers',
     np.get_include()]
 ext_params['extra_compile_args'] = ["-O2"]
-ext_params['extra_link_args'] = ["-Wl,-O1", "-Wl,--as-needed"]  # TODO: as-needed
+#ext_params['extra_link_args'] = ["-Wl,-O1", "-Wl,--as-needed"]  # TODO: as-needed
     # ignored due to parameter order bug in distutils (when calling linker)
 
 tokyo_ext_params = ext_params.copy()
